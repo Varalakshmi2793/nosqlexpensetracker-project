@@ -1,0 +1,17 @@
+{
+    "env": {
+"RAZORPAY_KEY_ID": "rzp_test_TglU27Mwje0LGO",
+"RAZORPAY_KEY_SECRET" : "3Yl9YGQWQBaU5PCGUSpJLRNE",
+"SENGRID_API_KEY" :"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",
+
+"DATABASE_NAME": "testexpense",
+"DB_USERNAME":"root",
+"DB_PASSWORD": "Password@123",
+"DB_HOST":"localhost",
+
+"BUCKET_NAME" : "expensesupload",
+"IAM_USER_KEY": "AKIA5FTZETITIESVRF5P",
+"IAM_USER_SECRET" : "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"
+
+    }
+}

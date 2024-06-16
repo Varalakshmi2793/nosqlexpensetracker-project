@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <label class="logo"> Expense Tracker </label>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            </ul>
+    </nav>
+    <div class="container">
+        <div class="text"> User Login</div>
+
+   
+    <form action="/expense" method="post">
+        <div class="formgrp">
+            <label for="email">Email:</label>
+            <input type="email" class="formcontrol" id="email" name="email">
+        </div>
+        <div class="formgrp">
+            <label for="password">Password:</label>
+            <input type="password" class="formcontrol" id="password" name="password">
+        </div>
+        <div class="forgetpass">
+            <a href="/forgetpassword">Forget Password</a>
+        </div>
+        <div id="message" style="color: rgb(99, 14, 14); display: none;"></div>
+        <button type="submit" class="btn">Login In</button>
+        
+        <div class="signupform">
+            Not a member? <a href="/signup">Signup now</a>
+        </div>
+    </form>
+</div>
+</div>
+<script>
+    document.querySelector('form').addEventListener('submit', async (event) => {
+        event.preventDefault(); 
+
+        const formData = new FormData(event.target);
+        const userData = {
+            email: formData.get('email'),
+            password: formData.get('password')
+        };
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (!response.ok) {
+                
+                const responseData = await response.json(); 
+                const errorMessage = responseData.error +': ' +response.status; 
+                document.getElementById('message').textContent = errorMessage;
+                document.getElementById('message').style.display = 'block';
+                return;
+            }
+            
+            alert("logged in successfully");
+            window.location.href = '/expense';; 
+
+            const data = await response.json();
+            console.log(data); 
+            token=data.token;
+            localStorage.setItem('token', token)
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
+
+</body>
+</html>
